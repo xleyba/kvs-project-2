@@ -1,5 +1,6 @@
 extern crate clap;
 use clap::{App, AppSettings, Arg, SubCommand};
+use std::process::exit;
 
 fn main() {
     let matches = App::new(env!("CARGO_PKG_NAME"))
@@ -19,5 +20,31 @@ fn main() {
                         .required(true),
                 ),
         )
+        .subcommand(
+            SubCommand::with_name("get")
+                .about("Get a value for a KEY string")
+                .arg(Arg::with_name("KEY").help("A string key").required(true)),
+        )
+        .subcommand(
+            SubCommand::with_name("rm")
+                .about("Remove a value for a KEY string")
+                .arg(Arg::with_name("KEY").help("A string key").required(true)),
+        )
         .get_matches();
+
+    match matches.subcommand() {
+        ("set", Some(_matches)) => {
+            eprintln!("unimplemented");
+            exit(1);
+        }
+        ("get", Some(_matches)) => {
+            eprintln!("unimplemented");
+            exit(1);
+        }
+        ("rm", Some(_matches)) => {
+            eprintln!("unimplemented");
+            exit(1);
+        }
+        _ => unreachable!(),
+    }
 }
